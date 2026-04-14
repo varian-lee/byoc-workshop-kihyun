@@ -1,0 +1,32 @@
+# CloudPrem overlay — included by start.sh when DD_CLOUDPREM_ENABLED=true
+# Ref: https://docs.datadoghq.com/cloudprem/install/docker/
+
+services:
+  cloudprem:
+    image: datadog/cloudprem:edge
+    command: ["run"]
+    ports:
+      - "${DD_CLOUDPREM_PORT:-7280}:7280"
+    environment:
+      - DD_SITE=${DD_SITE:-datadoghq.com}
+      - DD_API_KEY=${DD_API_KEY}
+      # JSON logs — avoids ANSI codes in Datadog Log Explorer.
+      - QW_LOG_FORMAT=json
+      - NO_COLOR=1
+    volumes:
+      - ./cloudprem-data:/quickwit/qwdata
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sf http://localhost:7280/api/v1/version || exit 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+    restart: unless-stopped
+
+  # Route Agent logs to local CloudPrem instead of Datadog SaaS
+  datadog:
+    environment:
+      - DD_LOGS_CONFIG_LOGS_DD_URL=http://cloudprem:7280
+    depends_on:
+      cloudprem:
+        condition: service_healthy

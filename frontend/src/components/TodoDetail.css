@@ -1,0 +1,197 @@
+.todo-detail {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+}
+
+.detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.detail-header h3 {
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.close-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.close-btn:hover {
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.detail-body {
+  padding: 20px;
+}
+
+.detail-status {
+  margin-bottom: 12px;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.status-badge.done {
+  background: #d4edda;
+  color: #155724;
+}
+
+.status-badge.pending {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.detail-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin-bottom: 20px;
+  line-height: 1.4;
+}
+
+.detail-title.completed-text {
+  text-decoration: line-through;
+  color: #888;
+}
+
+.detail-section {
+  margin-bottom: 16px;
+}
+
+.detail-section label {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 4px;
+}
+
+.detail-desc {
+  font-size: 14px;
+  color: #444;
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
+.detail-deadline {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.deadline-date {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a1a2e;
+}
+
+.deadline-relative {
+  font-size: 12px;
+  color: #888;
+}
+
+.detail-deadline.overdue .deadline-date {
+  color: #e74c3c;
+}
+
+.detail-deadline.overdue .deadline-relative {
+  color: #e74c3c;
+}
+
+.detail-deadline.today .deadline-date {
+  color: #f39c12;
+}
+
+.detail-deadline.today .deadline-relative {
+  color: #f39c12;
+}
+
+.detail-meta {
+  font-size: 13px;
+  color: #666;
+}
+
+.detail-footer {
+  padding: 16px 20px;
+  border-top: 1px solid #f0f2f5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.action-toggle {
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 2px solid #667eea;
+  background: white;
+  color: #667eea;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.action-toggle:hover {
+  background: #667eea;
+  color: white;
+}
+
+.action-group {
+  display: flex;
+  gap: 8px;
+}
+
+.action-edit,
+.action-delete {
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: none;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.action-edit {
+  background: #f0f2f5;
+  color: #444;
+}
+
+.action-edit:hover {
+  background: #e0e4f0;
+}
+
+.action-delete {
+  background: #fff0f0;
+  color: #e74c3c;
+}
+
+.action-delete:hover {
+  background: #ffdddd;
+}

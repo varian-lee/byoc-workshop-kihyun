@@ -1,0 +1,63 @@
+.todo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.section-header h2 {
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.count-badge {
+  background: rgba(255, 255, 255, 0.25);
+  color: white;
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.count-badge.completed {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.todo-items {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.completed-section {
+  opacity: 0.75;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 80px 40px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.empty-icon {
+  font-size: 56px;
+  margin-bottom: 16px;
+}
+
+.empty-state h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 8px;
+}
+
+.empty-state p {
+  font-size: 15px;
+}

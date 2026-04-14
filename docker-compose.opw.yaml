@@ -1,0 +1,34 @@
+# OPW overlay — included by start.sh when DD_OP_PIPELINE_ID is set.
+# Ref: https://docs.datadoghq.com/cloudprem/ingest/observability_pipelines/
+
+services:
+  opw:
+    image: datadog/observability-pipelines-worker:latest
+    command: ["run"]
+    ports:
+      - "8282:8282"
+    environment:
+      - DD_API_KEY=${DD_API_KEY}
+      - DD_SITE=${DD_SITE:-datadoghq.com}
+      - DD_OP_PIPELINE_ID=${DD_OP_PIPELINE_ID}
+      # Defaults to local CloudPrem; override with DD_OP_DESTINATION_CLOUDPREM_URL in .env.
+      - DD_OP_DESTINATION_CLOUDPREM_ENDPOINT_URL=${DD_OP_DESTINATION_CLOUDPREM_URL:-http://cloudprem:7280}
+      - DD_OP_SOURCE_BYOC_WORKSHOP_AGENT=0.0.0.0:8282
+      - DD_OP_SOURCE_DATADOG_AGENT_ADDRESS=0.0.0.0:8282
+    volumes:
+      - opw_data:/var/lib/observability-pipelines-worker
+    restart: unless-stopped
+
+  # Redirect Agent logs through OPW → CloudPrem
+  # DD_LOGS_CONFIG_LOGS_DD_URL is unset here to prevent the cloudprem overlay
+  # from routing Agent logs directly to CloudPrem, bypassing OPW.
+  datadog:
+    environment:
+      - DD_OBSERVABILITY_PIPELINES_WORKER_LOGS_ENABLED=true
+      - DD_OBSERVABILITY_PIPELINES_WORKER_LOGS_URL=http://opw:8282
+      - DD_LOGS_CONFIG_LOGS_DD_URL=
+    depends_on:
+      - opw
+
+volumes:
+  opw_data:
