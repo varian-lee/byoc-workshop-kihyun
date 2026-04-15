@@ -62,6 +62,7 @@ clean_cloudprem_data() {
     rm -rf "./cloudprem-data"
   fi
   mkdir -p "./cloudprem-data"
+  chmod 777 "./cloudprem-data"
   echo "✅ CloudPrem data directory reset."
 }
 
@@ -204,6 +205,12 @@ case "$SUBCOMMAND" in
   up)
     shift
     check_cloudprem_stale_data
+    # Pre-create cloudprem-data with open permissions so the non-root
+    # CloudPrem process can write to the bind-mounted directory.
+    if [ "${DD_CLOUDPREM_ENABLED:-true}" = "true" ]; then
+      mkdir -p ./cloudprem-data
+      chmod 777 ./cloudprem-data
+    fi
     print_banner
 
     DETACHED=false
